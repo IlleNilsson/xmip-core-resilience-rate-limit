@@ -109,8 +109,9 @@ impl Guard for RateLimit {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use resilience::{Failure, Guarded, execute};
+    use resilience::{Guarded, execute};
     use std::cell::Cell;
+    use xcore::Failure;
 
     #[test]
     fn a_burst_goes_at_once_and_the_next_attempt_waits_for_its_permit() {
@@ -197,7 +198,7 @@ mod tests {
 
         fn after(&self, attempt: &Attempt) -> Decision {
             match &attempt.failure {
-                Some(failure) if failure.is_retryable() && attempt.number < self.0 => {
+                Some(failure) if failure.retryable && attempt.number < self.0 => {
                     Decision::Wait(Duration::ZERO)
                 }
                 _ => Decision::Proceed,
