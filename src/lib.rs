@@ -12,6 +12,7 @@
 
 use std::sync::Mutex;
 use std::time::{Duration, Instant};
+use xcore::lock::Locked;
 
 use resilience::{Attempt, Decision, Guard};
 
@@ -76,9 +77,7 @@ impl RateLimit {
     }
 
     fn lock(&self) -> std::sync::MutexGuard<'_, Bucket> {
-        self.bucket
-            .lock()
-            .unwrap_or_else(std::sync::PoisonError::into_inner)
+        self.bucket.locked()
     }
 }
 
