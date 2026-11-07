@@ -109,6 +109,7 @@ impl Guard for RateLimit {
 mod tests {
     use super::*;
     use resilience::{Guarded, execute};
+    use std::assert_matches;
     use std::cell::Cell;
     use xcore::Failure;
 
@@ -174,7 +175,7 @@ mod tests {
                 calls.set(calls.get() + 1);
                 Ok(calls.get())
             });
-            assert!(matches!(outcome, Ok(Guarded::Done(_))), "{outcome:?}");
+            assert_matches!(outcome, Ok(Guarded::Done(_)), "{outcome:?}");
         }
         assert_eq!(calls.get(), 3);
         assert!(
