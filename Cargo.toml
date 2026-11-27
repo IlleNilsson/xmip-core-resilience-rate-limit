@@ -1,11 +1,11 @@
 [package]
 name = "xmip-core-resilience-rate-limit"
-version = "0.1.0"
-edition = "2024"
-license = "AGPL-3.0-or-later"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
 repository = "https://github.com/IlleNilsson/xmip-core-resilience-rate-limit"
 description = "Rate limit guard: a token bucket that refills one permit per interval up to a burst, and makes an attempt wait for its token rather than refusing it. A xmip-core-resilience technology."
-publish = false
+publish.workspace = true
 
 [lib]
 path = "src/lib.rs"
@@ -23,13 +23,5 @@ xcore = { package = "xmip-core", git = "https://github.com/IlleNilsson/xmip-core
 # Test-only.
 xcore = { package = "xmip-core", git = "https://github.com/IlleNilsson/xmip-core", branch = "main", features = ["test-support"] }
 
-[lints.rust]
-unsafe_code = "forbid"
-
-[lints.clippy]
-too_many_lines = "warn"
-pedantic = { level = "warn", priority = -1 }
-missing_errors_doc = "warn"
-missing_panics_doc = "warn"
-unwrap_used = "warn"
-expect_used = "allow"
+[lints]
+workspace = true
