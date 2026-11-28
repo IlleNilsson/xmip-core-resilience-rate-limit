@@ -13,15 +13,15 @@ path = "src/lib.rs"
 [dependencies]
 # A Technology depends on its parent Capability, never the reverse
 # (repository-model.md).
-resilience = { package = "xmip-core-resilience", git = "https://github.com/IlleNilsson/xmip-core-resilience", branch = "main" }
+resilience = { workspace = true }
 # The lock taken whether or not a thread panicked under it, the failure a
 # test hands the guard, and the Clock the bucket is refilled by.
-xcore = { package = "xmip-core", git = "https://github.com/IlleNilsson/xmip-core", branch = "main" }
+xcore = { workspace = true }
 
 [dev-dependencies]
 # The one test clock, stepped to the next permit (`xcore::clock::Stepped`).
 # Test-only.
-xcore = { package = "xmip-core", git = "https://github.com/IlleNilsson/xmip-core", branch = "main", features = ["test-support"] }
+xcore = { workspace = true, features = ["test-support"] }
 
 [lints]
 workspace = true
